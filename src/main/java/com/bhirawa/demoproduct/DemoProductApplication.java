@@ -16,6 +16,7 @@ public class DemoProductApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(StudentRepository studentRepository){
 		return args -> {
+			System.out.println("Add student");
 			Student bhirawa = new Student(
 				"Bhirawa", "Satrio", "bhir@yahoo.com", 29
 			);
@@ -25,6 +26,21 @@ public class DemoProductApplication {
 			studentRepository.saveAll(List.of(bhirawa,satrio));
 
 			//find student by ID
+			System.out.println("Find by ID");
+			studentRepository.findById(2L).
+					ifPresentOrElse(System.out::println, () -> {
+					System.out.println("Student with id 2 not found!");
+			});
+
+			//find all student
+			System.out.println("Find all student");
+			List <Student> students = studentRepository.findAll();
+			students.forEach(System.out::println);
+
+			//delete student
+			/*studentRepository.deleteById(1L);
+			System.out.println(studentRepository.count());*/
+
 		};
 	}
 }
