@@ -1,5 +1,7 @@
 <<<<<<< HEAD
 # Compiled class file
+application.properties
+
 *.class
 
 # Log file
