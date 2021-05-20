@@ -25,7 +25,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 =======
-HELP.md
+../../../HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -41,7 +41,7 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-**/application.properties
+application.properties
 .idea
 *.iws
 *.iml
