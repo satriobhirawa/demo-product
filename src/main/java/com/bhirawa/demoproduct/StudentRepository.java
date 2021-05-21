@@ -1,8 +1,11 @@
 package com.bhirawa.demoproduct;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +19,16 @@ public interface StudentRepository extends JpaRepository <Student, Long> {
     List<Student> selectStudentWhereFirstNameAndAgeGreaterOrEqual(
             String firstName, Integer age);
 
-    @Query(value = "SELECT * FROM student WHERE first_name = ?1 AND age >= ?2", nativeQuery = true)
+    //we can also use @Param from spring to specify, instead with ?1 etc.
+    @Query(value = "SELECT * FROM student WHERE first_name = :firstName AND age >= :age", nativeQuery = true)
     List<Student> selectStudentWhereFirstNameAndAgeGreaterOrEqualNative(
-            String firstName, Integer age);
+            @Param("firstName") String firstName,
+            @Param("age")Integer age);
+
+    //deletion
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Student s WHERE s.id = :id")
+    int deleteStudentById(@Param("id") Long id);
 
 }

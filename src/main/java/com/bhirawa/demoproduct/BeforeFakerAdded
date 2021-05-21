@@ -1,0 +1,48 @@
+Goes to the args on app before Faker added.
+            
+            Student bhirawa = new Student(
+            "Bhirawa", "Satrio", "bhir@yahoo.com", 29
+            );
+            Student satrio = new Student(
+            "Satrio", "Nugroho", "satr@yahoo.com", 30
+            );
+            Student nugroho = new Student(
+            "Nugroho", "Zakaria", "nugr@yahoo.com", 31
+            );
+            studentRepository.saveAll(List.of(bhirawa,satrio,nugroho));
+            studentRepository
+            .findStudentByEmail("bhir@yahoo.com")
+            .ifPresentOrElse(System.out::println, ()-> System.out.println("Student with that email not found"));
+
+			//find by first name and age with custom query
+			studentRepository.selectStudentWhereFirstNameAndAgeGreaterOrEqual(
+					"Bhirawa",
+					28
+			).forEach(System.out::println);
+
+			//find by first name and age with native query
+			studentRepository.selectStudentWhereFirstNameAndAgeGreaterOrEqualNative(
+					"Satrio",
+					29
+			).forEach(System.out::println);
+
+			//delete by ID with custom method and return affected row
+			System.out.println(studentRepository.deleteStudentById(3L));
+
+
+
+		//find student by ID
+        /*			System.out.println("Find by ID");
+        studentRepository.findById(2L).
+        ifPresentOrElse(System.out::println, () -> {
+        System.out.println("Student with id 2 not found!");
+        });
+
+        //find all student
+        System.out.println("Find all student");
+        List <Student> students = studentRepository.findAll();
+        students.forEach(System.out::println);*/
+
+        //delete student
+        /*studentRepository.deleteById(1L);
+        System.out.println(studentRepository.count());*/
