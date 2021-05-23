@@ -90,3 +90,15 @@ testing many to one, book student relationship
 			StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
 			studentIdCardRepository.save(studentIdCard);
 			//studentIdCardRepository.findById(1L).ifPresent(System.out::println);
+
+testing lazy fetch
+
+            //testing Fetch Lazy on book
+            studentRepository.findById(1L)
+            .ifPresent(s-> {
+            System.out.println("Fetch book Lazy...");
+            List<Book> books = student.getBooks();
+            books.forEach( book ->
+            System.out.println(s.getFirstName() + " borrows " + book.getBookName() )
+            );
+            });

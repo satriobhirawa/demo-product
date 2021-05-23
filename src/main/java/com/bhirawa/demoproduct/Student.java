@@ -63,7 +63,8 @@ public class Student {
     @OneToMany(
             mappedBy = "student",
             orphanRemoval = true,
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
     )
     private List<Book> books = new ArrayList<>();
 
@@ -130,6 +131,11 @@ public class Student {
             this.books.remove(book);
             book.setStudent(null);
         }
+    }
+
+    //get books (Lazy fetch testing)
+    public List<Book> getBooks() {
+        return books;
     }
 
     @Override

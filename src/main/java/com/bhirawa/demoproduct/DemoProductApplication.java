@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootApplication
 public class DemoProductApplication {
@@ -35,6 +36,17 @@ public class DemoProductApplication {
 			//generateRandomStudent(studentRepository);
 			StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
 			studentIdCardRepository.save(studentIdCard);
+
+			//testing Fetch Lazy on book
+			studentRepository.findById(1L)
+					.ifPresent(s-> {
+						System.out.println("Fetch book Lazy...");
+						List<Book> books = student.getBooks();
+						books.forEach( book ->
+								System.out.println(s.getFirstName() + " borrows " + book.getBookName() )
+						);
+					});
+
 			//studentIdCardRepository.findById(1L).ifPresent(System.out::println);
 		};
 	}
