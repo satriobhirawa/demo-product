@@ -35,7 +35,10 @@ public class DemoProductApplication {
 			student.addBook(new Book("Spring", LocalDateTime.now().minusYears(1)));
 			//generateRandomStudent(studentRepository);
 			StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
-			studentIdCardRepository.save(studentIdCard);
+			//refactor student id card in student and saving as student
+			student.setStudentIdCard(studentIdCard);
+			studentRepository.save(student);
+			//studentIdCardRepository.save(studentIdCard);
 
 			//testing Fetch Lazy on book
 			studentRepository.findById(1L)

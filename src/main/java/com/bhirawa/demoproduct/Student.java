@@ -57,7 +57,7 @@ public class Student {
     private Integer age;
 
     //student from private Student student in StudentIdCard
-    @OneToOne(mappedBy = "student", orphanRemoval = true)
+    @OneToOne(mappedBy = "student", orphanRemoval = true, cascade = CascadeType.ALL)
     private StudentIdCard studentIdCard;
 
     @OneToMany(
@@ -136,6 +136,10 @@ public class Student {
     //get books (Lazy fetch testing)
     public List<Book> getBooks() {
         return books;
+    }
+
+    public void setStudentIdCard(StudentIdCard studentIdCard) {
+        this.studentIdCard = studentIdCard;
     }
 
     @Override
