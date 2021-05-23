@@ -1,5 +1,5 @@
-Goes to the args on app before Faker added.
-            
+before Faker added.
+
             Student bhirawa = new Student(
             "Bhirawa", "Satrio", "bhir@yahoo.com", 29
             );
@@ -46,3 +46,28 @@ Goes to the args on app before Faker added.
         //delete student
         /*studentRepository.deleteById(1L);
         System.out.println(studentRepository.count());*/
+
+pagination and sorting before student_id_card created (testing purpose VERSION 1)
+
+            //sorting(studentRepository);
+			//pagination + sorting
+			//example page 0 : first page, size of data per page 5
+			PageRequest pageRequest = PageRequest.of(0,
+					5,
+					Sort.by("firstName").ascending());
+			Page<Student> page = studentRepository.findAll(pageRequest);
+			System.out.println(page);
+create student entity only with 
+
+            Faker faker = new Faker();
+            String firstName = faker.name().firstName();
+            String lastName = faker.name().lastName();
+            String email = String.format("%s.%s@yahoo.com", firstName, lastName);
+            Student student = new Student(firstName,
+            lastName,
+            email,
+            faker.number().numberBetween(17,55));
+
+            //generateRandomStudent(studentRepository);
+			StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
+			studentIdCardRepository.save(studentIdCard);

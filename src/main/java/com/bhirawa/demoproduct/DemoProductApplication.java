@@ -5,8 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 @SpringBootApplication
@@ -17,20 +15,21 @@ public class DemoProductApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(StudentRepository studentRepository){
+	CommandLineRunner commandLineRunner(StudentRepository studentRepository,
+										StudentIdCardRepository studentIdCardRepository){
 		return args -> {
+			Faker faker = new Faker();
+			String firstName = faker.name().firstName();
+			String lastName = faker.name().lastName();
+			String email = String.format("%s.%s@yahoo.com", firstName, lastName);
+			Student student = new Student(firstName,
+					lastName,
+					email,
+					faker.number().numberBetween(17,55));
 
-			generateRandomStudent(studentRepository);
-			//sorting(studentRepository);
-
-			//pagination + sorting
-			//example page 0 : first page, size of data per page 5
-			PageRequest pageRequest = PageRequest.of(0,
-					5,
-					Sort.by("firstName").ascending());
-			Page<Student> page = studentRepository.findAll(pageRequest);
-			System.out.println(page);
-
+			//generateRandomStudent(studentRepository);
+			StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
+			studentIdCardRepository.save(studentIdCard);
 		};
 	}
 
@@ -43,7 +42,7 @@ public class DemoProductApplication {
 		studentRepository.findAll(sort).forEach(student -> System.out.println(student.getFirstName() + " " + student.getAge()));
 	}
 
-	//use faker to populate the database
+	//use faker to populate the database Student
 	private void generateRandomStudent(StudentRepository studentRepository) {
 		Faker faker = new Faker();
 		for (int i = 0; i < 20 ; i++) {

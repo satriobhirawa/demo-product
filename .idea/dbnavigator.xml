@@ -26,13 +26,15 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="6ced7e58-ad6c-48d0-bfd6-1738882267ad">
-        <schema name="public" object-types="table, view, sequence, function" />
+        <schema name="information_schema" object-types="table, view, function" />
+        <schema name="pg_catalog" object-types="table, view, function" />
+        <schema name="public" object-types="table, view, function, column" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="6ced7e58-ad6c-48d0-bfd6-1738882267ad">
-      <console name="connection" type="STANDARD" schema="information_schema" session="Main" />
+      <console name="connection" type="STANDARD" schema="public" session="Main"><![CDATA[SELECT * FROM student JOIN student_id_card sic ON student.id = sic.student_id;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
