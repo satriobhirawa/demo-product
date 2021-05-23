@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Sort;
 
+import java.time.LocalDateTime;
+
 @SpringBootApplication
 public class DemoProductApplication {
 
@@ -27,10 +29,13 @@ public class DemoProductApplication {
 					email,
 					faker.number().numberBetween(17,55));
 
+			student.addBook(new Book("Clean Code", LocalDateTime.now().minusDays(4)));
+			student.addBook(new Book("Craps Code", LocalDateTime.now()));
+			student.addBook(new Book("Spring", LocalDateTime.now().minusYears(1)));
 			//generateRandomStudent(studentRepository);
 			StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
 			studentIdCardRepository.save(studentIdCard);
-			studentIdCardRepository.findById(1L).ifPresent(System.out::println);
+			//studentIdCardRepository.findById(1L).ifPresent(System.out::println);
 		};
 	}
 

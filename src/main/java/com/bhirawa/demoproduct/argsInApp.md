@@ -71,3 +71,22 @@ create student entity only with
             //generateRandomStudent(studentRepository);
 			StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
 			studentIdCardRepository.save(studentIdCard);
+
+testing many to one, book student relationship
+
+            Faker faker = new Faker();
+            String firstName = faker.name().firstName();
+            String lastName = faker.name().lastName();
+            String email = String.format("%s.%s@yahoo.com", firstName, lastName);
+            Student student = new Student(firstName,
+            lastName,
+            email,
+            faker.number().numberBetween(17,55));
+
+			student.addBook(new Book("Clean Code", LocalDateTime.now().minusDays(4)));
+			student.addBook(new Book("Craps Code", LocalDateTime.now()));
+			student.addBook(new Book("Spring", LocalDateTime.now().minusYears(1)));
+			//generateRandomStudent(studentRepository);
+			StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
+			studentIdCardRepository.save(studentIdCard);
+			//studentIdCardRepository.findById(1L).ifPresent(System.out::println);
