@@ -2,6 +2,9 @@ package com.bhirawa.demoproduct;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Course")
@@ -34,6 +37,10 @@ public class Course {
             columnDefinition = "TEXT"
     )
     private String department;
+    @ManyToMany(
+            mappedBy = "courses"
+    )
+    private List<Student> students = new ArrayList<>();
 
     public Course() {
     }
@@ -65,6 +72,14 @@ public class Course {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     @Override
