@@ -37,7 +37,10 @@
 
 SELECT * FROM book;
 
-SELECT * FROM book JOIN student ON book.student_id = student.id;]]></console>
+SELECT * FROM book JOIN student ON book.student_id = student.id;
+
+SELECT * FROM student JOIN enrollment ON student.id = enrollment.student_id 
+JOIN course on enrollment.course_id = course.id;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

@@ -37,6 +37,10 @@ public class DemoProductApplication {
 			StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
 			//refactor student id card in student and saving as student
 			student.setStudentIdCard(studentIdCard);
+
+			student.enrollToCourse(new Course("Database", "IT"));
+			student.enrollToCourse(new Course("Networking", "IT"));
+
 			studentRepository.save(student);
 			//studentIdCardRepository.save(studentIdCard);
 
@@ -51,6 +55,7 @@ public class DemoProductApplication {
 					});
 
 			//studentIdCardRepository.findById(1L).ifPresent(System.out::println);
+
 		};
 	}
 
