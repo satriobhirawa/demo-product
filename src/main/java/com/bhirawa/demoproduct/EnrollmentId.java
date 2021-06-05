@@ -2,10 +2,11 @@ package com.bhirawa.demoproduct;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class EnrollmentId {
+public class EnrollmentId implements Serializable {
     @Column(name = "student_id")
     private Long studentId;
     @Column(name = "course_id")

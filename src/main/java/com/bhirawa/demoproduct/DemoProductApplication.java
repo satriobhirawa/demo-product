@@ -38,8 +38,12 @@ public class DemoProductApplication {
 			//refactor student id card in student and saving as student
 			student.setStudentIdCard(studentIdCard);
 
-			student.enrollToCourse(new Course("Database", "IT"));
-			student.enrollToCourse(new Course("Networking", "IT"));
+			//doesn't need this for enrollment entity
+//			student.enrollToCourse(new Course("Database", "IT"));
+//			student.enrollToCourse(new Course("Networking", "IT"));
+
+			student.addEnrollment(new Enrollment(new EnrollmentId(1L,1L),student,new Course("Database", "IT"), LocalDateTime.now()));
+			student.addEnrollment(new Enrollment(new EnrollmentId(1L,2L),student,new Course("Networking", "IT"),LocalDateTime.now().minusDays(10)));
 
 			studentRepository.save(student);
 			//studentIdCardRepository.save(studentIdCard);
