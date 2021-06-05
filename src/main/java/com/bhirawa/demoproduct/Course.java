@@ -37,10 +37,15 @@ public class Course {
             columnDefinition = "TEXT"
     )
     private String department;
-    @ManyToMany(
+    /*@ManyToMany(
             mappedBy = "courses"
     )
-    private List<Student> students = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();*/
+    @OneToMany(
+            mappedBy = "course",     //found in enrollment
+            cascade = CascadeType.ALL
+    )
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     public Course() {
     }
@@ -74,12 +79,16 @@ public class Course {
         this.department = department;
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public void addEnrollment(Enrollment enrollment){
+        if(!enrollments.contains(enrollment)){
+            enrollments.add(enrollment);
+        }
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public void removeEnrollment(Enrollment enrollment){
+
+        enrollments.remove(enrollment);
+
     }
 
     @Override

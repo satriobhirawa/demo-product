@@ -67,6 +67,9 @@ public class Student {
             fetch = FetchType.LAZY
     )
     private List<Book> books = new ArrayList<>();
+    /*
+    //Doesn't need this, if enrollment entity was created.
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "enrollment",
@@ -80,7 +83,13 @@ public class Student {
             )
     )
     private List<Course> courses = new ArrayList<>();
+    */
 
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "student"        //found student from enrollment
+    )
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     public Student(String firstName, String lastName, String email, Integer age) {
 
@@ -155,7 +164,27 @@ public class Student {
         this.studentIdCard = studentIdCard;
     }
 
-    public List<Course> getCourses() {
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments(List<Enrollment> enrollments) {
+        this.enrollments = enrollments;
+    }
+
+    public void addEnrollment(Enrollment enrollment){
+        if(!enrollments.contains(enrollment)){
+            enrollments.add(enrollment);
+        }
+    }
+
+    public void removeEnrollment(Enrollment enrollment){
+
+            enrollments.remove(enrollment);
+
+    }
+    //doesn't need this if enrollment entity was created
+    /*public List<Course> getCourses() {
         return courses;
     }
 
@@ -167,7 +196,7 @@ public class Student {
     public void unenrollToCourse(Course course){
         courses.remove(course);
         course.getStudents().remove(this);
-    }
+    }*/
     @Override
     public String toString() {
         return "Student{" +
